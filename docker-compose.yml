@@ -1,0 +1,102 @@
+#  // Determine Docker container name and get shell access to it
+#    $ docker ps
+#    $ docker exec -it <container_name> sh
+version: "3"
+services:
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    networks:
+      - spring
+    ports:
+      - "9411:9411"
+
+  rabbitmq:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq
+    networks:
+      - spring
+    ports:
+      - "5672:5672" #producer to connect
+      - "15672:15672" #management console
+
+  eureka-server:
+    image: ravishankar2463/eureka-server
+    container_name: eureka-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    ports:
+      - "8761:8761"
+    depends_on:
+      - zipkin
+      - rabbitmq
+    healthcheck:
+      test: [ "bash", "curl","-i","http://guest:guest@localhost:rabbitmq/api/aliveness-test/%2F"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  apigw:
+    image: ravishankar2463/apigw
+    container_name: apigw
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    ports:
+      - "8083:8083"
+    depends_on:
+      - zipkin
+      - rabbitmq
+      - eureka-server
+
+  customer:
+    image: ravishankar2463/customer
+    container_name: customer
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    ports:
+      - "8080:8080"
+    depends_on:
+      - zipkin
+      - rabbitmq
+      - eureka-server
+      - apigw
+
+  notification:
+    image: ravishankar2463/notification
+    container_name: notification
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    ports:
+      - "8082:8082"
+    depends_on:
+      - zipkin
+      - rabbitmq
+      - eureka-server
+      - apigw
+
+  product:
+    image: ravishankar2463/product
+    container_name: product
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    ports:
+      - "8081:8081"
+    depends_on:
+      - zipkin
+      - rabbitmq
+      - eureka-server
+      - apigw
+
+networks:
+  spring:
+    driver: bridge

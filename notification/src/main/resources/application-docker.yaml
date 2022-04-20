@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: notification
+  rabbitmq:
+    addresses: rabbitmq:5672
+  zipkin:
+    base-url: http://zipkin:9411
+
+server:
+  port: 8082
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
