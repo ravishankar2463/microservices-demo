@@ -1,4 +1,4 @@
-package com.example.amqp.queues.exceptions;
+package com.example.amqp.rabbitMQ.queues.exceptions;
 
 public class NoRoutingKeyIsMappedToExchangeException extends Exception{
     public NoRoutingKeyIsMappedToExchangeException(String message) {

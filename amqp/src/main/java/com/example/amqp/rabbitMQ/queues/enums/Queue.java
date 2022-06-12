@@ -1,4 +1,4 @@
-package com.example.amqp.queues.enums;
+package com.example.amqp.rabbitMQ.queues.enums;
 
 import lombok.experimental.FieldNameConstants;
 

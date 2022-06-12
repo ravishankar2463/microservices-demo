@@ -1,4 +1,4 @@
-package com.example.amqp.queues.exceptions;
+package com.example.amqp.rabbitMQ.queues.exceptions;
 
 public class NoExchangeIsMappedToQueueException extends Exception{
     public NoExchangeIsMappedToQueueException(String message) {

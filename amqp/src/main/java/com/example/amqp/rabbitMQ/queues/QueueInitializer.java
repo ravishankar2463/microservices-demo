@@ -1,14 +1,13 @@
-package com.example.amqp.queues;
+package com.example.amqp.rabbitMQ.queues;
 
-import com.example.amqp.queues.enums.Exchange;
-import com.example.amqp.queues.enums.Queue;
-import com.example.amqp.queues.enums.RoutingKeys;
-import com.example.amqp.queues.exceptions.NoExchangeIsMappedToQueueException;
-import com.example.amqp.queues.exceptions.NoRoutingKeyIsMappedToExchangeException;
+import com.example.amqp.rabbitMQ.queues.enums.Exchange;
+import com.example.amqp.rabbitMQ.queues.enums.Queue;
+import com.example.amqp.rabbitMQ.queues.enums.RoutingKeys;
+import com.example.amqp.rabbitMQ.queues.exceptions.NoExchangeIsMappedToQueueException;
+import com.example.amqp.rabbitMQ.queues.exceptions.NoRoutingKeyIsMappedToExchangeException;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Component
 public class QueueInitializer {

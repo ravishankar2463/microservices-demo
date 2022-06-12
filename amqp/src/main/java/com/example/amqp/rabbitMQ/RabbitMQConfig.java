@@ -1,4 +1,4 @@
-package com.example.amqp;
+package com.example.amqp.rabbitMQ;
 
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.AmqpTemplate;
