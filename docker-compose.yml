@@ -32,11 +32,6 @@ services:
     depends_on:
       - zipkin
       - rabbitmq
-    healthcheck:
-      test: [ "bash", "curl","-i","http://guest:guest@localhost:rabbitmq/api/aliveness-test/%2F"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   apigw:
     image: ravishankar2463/apigw

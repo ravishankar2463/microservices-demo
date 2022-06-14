@@ -1,14 +1,12 @@
 package com.example.customer;
 
-import com.example.amqp.RabbitMQMessageProducer;
-import com.example.amqp.queues.enums.Exchange;
-import com.example.amqp.queues.enums.Queue;
-import com.example.amqp.queues.enums.RoutingKeys;
 import com.example.clients.product.ProductClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class CustomerController {
 
-    private static int id = 0;
-
     private final ProductClient productClient;
-    private final RabbitMQMessageProducer rabbitMQMessageProducer;
+
+    @Autowired
+    private final KafkaTemplate<String,String> kafkaTemplate;
 
     @GetMapping
     public ResponseEntity<String> getAllCustomers(){
@@ -34,13 +32,8 @@ public class CustomerController {
 
         response = response.concat("\n"+productsResponse);
 
-        id++;
-        rabbitMQMessageProducer.publish(
-                "customer" + id,
-                Exchange.InternalExchange.name(),
-                RoutingKeys.InternalNotificationRoutingKey.name()
-        );
+        kafkaTemplate.send("user",response);
 
-        return new ResponseEntity<String>(response,HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

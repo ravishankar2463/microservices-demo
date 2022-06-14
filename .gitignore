@@ -1,0 +1,5 @@
+/apigw/logs/
+/product/logs/
+/customer/logs/
+/notification/logs/
+/eureka-server/logs/

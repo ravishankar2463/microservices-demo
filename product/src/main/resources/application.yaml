@@ -20,3 +20,13 @@ eureka:
 
 server:
   port: 8081
+
+cors:
+  allowedOrigins:
+    localhost:
+      path: /api/v1/products
+      instanceUrl: http://localhost:8080
+
+logging:
+  file:
+    name: C:\logs\product-service.logs

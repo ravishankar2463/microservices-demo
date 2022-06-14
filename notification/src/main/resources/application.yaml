@@ -13,3 +13,13 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
+
+cors:
+  allowedOrigins:
+    localhost:
+      path: /api/v1/notification
+      instanceUrl: http://localhost:8080
+
+logging:
+  file:
+    name: C:\logs\notification-service.logs

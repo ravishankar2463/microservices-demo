@@ -15,11 +15,3 @@ public class EurekaServerApplication {
         SpringApplication.run(EurekaServerApplication.class,args);
     }
 }
-
-@RestController
-class HealthCheckController{
-    @GetMapping("/online")
-    public ResponseEntity<String> shouldReturnOk(){
-        return new ResponseEntity<String>("online", HttpStatus.OK);
-    }
-}

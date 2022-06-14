@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8083
 
 spring:
   application:
@@ -13,3 +13,13 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
+
+cors:
+  allowedOrigins:
+    localhost:
+      path: /api/v1/customers
+      instanceUrl: http://localhost:8080
+
+logging:
+  file:
+    name: C:\logs\customer-service.logs
