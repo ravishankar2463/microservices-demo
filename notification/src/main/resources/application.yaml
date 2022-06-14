@@ -19,3 +19,7 @@ cors:
     localhost:
       path: /api/v1/notification
       instanceUrl: http://localhost:8080
+
+logging:
+  file:
+    name: C:\logs\notification-service.logs

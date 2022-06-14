@@ -26,3 +26,7 @@ eureka:
 swagger:
   config:
     refreshrate: 5000000
+
+logging:
+  file:
+    name: C:\logs\apigateway.logs

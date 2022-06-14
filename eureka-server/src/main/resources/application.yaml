@@ -21,3 +21,7 @@ eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
+
+logging:
+  file:
+    name: C:\logs\eurekaserver.logs

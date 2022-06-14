@@ -19,3 +19,7 @@ cors:
     localhost:
       path: /api/v1/customers
       instanceUrl: http://localhost:8080
+
+logging:
+  file:
+    name: C:\logs\customer-service.logs
